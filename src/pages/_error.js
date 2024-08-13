@@ -10,9 +10,9 @@ export default function CustomErrorPage() {
                     <Col xs={12} sm={8} md={6} lg={4}>
                         <Card className="text-center">
                             <Card.Body>
-                                <Card.Title>Access Denied!</Card.Title>
+                                <Card.Title>Error!</Card.Title>
                                 <Alert variant="warning">
-                                    You need to log in to use the app.
+                                    You need to log in.
                                 </Alert>
                                 <Button href="/login" variant="primary" className="me-2">
                                     Log In

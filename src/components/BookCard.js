@@ -1,12 +1,25 @@
 // components/BookCard.js
 import { useState } from 'react';
-import { Form, Button, Card, Row, Col, Modal } from 'react-bootstrap';
+import { Button, Card, Modal } from 'react-bootstrap';
 import { addBook, removeBook } from '../../lib/authenticate';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useAtom } from 'jotai';
+import { authStatusAtom } from '../store/atoms'; 
+import { isAuthenticated} from '../../lib/authenticate';
+
+
 
 export default function BookCard({book}) {
+    const [authStatus, setAuthStatus] = useAtom(authStatusAtom); 
     const router = useRouter();
-    
+
+    useEffect(() => {
+        const loggedIn = isAuthenticated(); 
+        setAuthStatus(loggedIn);
+      }, [setAuthStatus]);
+
+
     //Card CSS Classes:
     const cardStyle = {
         height: '100%',
@@ -25,6 +38,11 @@ export default function BookCard({book}) {
       if (!volumeInfo) {
           console.error("Attempted to add an invalid book: ", book);
           return;
+      }
+
+      if (!authStatus) {
+        router.push('/_error');
+        return;
       }
 
       const bookId = book.id || volumeInfo.id || 'No ID';
