@@ -5,17 +5,17 @@ function NoTransitionExample() {
   return (
     <Carousel slide={false}>
       <Carousel.Item>
-        <ExampleCarouselImage src="/images/4.jpg" alt="First slide" />
+        <ExampleCarouselImage src="/images/1.jpg" alt="First slide" />
         <Carousel.Caption>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <ExampleCarouselImage src="/images/5.jpg" alt="Second slide" />
+        <ExampleCarouselImage src="/images/2.jpg" alt="Second slide" />
         <Carousel.Caption>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <ExampleCarouselImage src="/images/6.jpg" alt="Third slide" />
+        <ExampleCarouselImage src="/images/3.jpg" alt="Third slide" />
         <Carousel.Caption>
         </Carousel.Caption>
       </Carousel.Item>
