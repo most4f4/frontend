@@ -9,7 +9,6 @@ import { authStatusAtom } from '../store/atoms';
 import { isAuthenticated} from '../../lib/authenticate';
 
 
-
 export default function BookCard({book}) {
     const [authStatus, setAuthStatus] = useAtom(authStatusAtom); 
     const router = useRouter();
@@ -53,9 +52,14 @@ export default function BookCard({book}) {
       const thumbnail = volumeInfo.imageLinks?.thumbnail || 'https://via.placeholder.com/150';
       const description = volumeInfo.description || 'No Description Available';
 
-      addBook(bookId, title, subtitle, publisher, authors, thumbnail, description)
+      const category =  volumeInfo.categories?.join(', ') || "Unknown Category"
+      const publishDate = volumeInfo.publishedDate || "No Published Date Available"
+      const pageCount = volumeInfo.pageCount || "No Page Count Available"
+
+      addBook(bookId, title, subtitle, publisher, authors, thumbnail, description, category, publishDate, pageCount)
           .then(() => {
               console.log("Book successfully added to favorites list");
+              setModalShow(false);
               router.push("/");
           })
           .catch(err => {
@@ -81,9 +85,13 @@ export default function BookCard({book}) {
       const title = book.volumeInfo?.title || book.title || 'No Title Available';
       const subtitle = book.volumeInfo?.subtitle || book.subtitle || 'No Subtitle Available';
       const publisher = book.volumeInfo?.publisher || book.publisher || 'Unknown Publisher';
-      const authors = book.volumeInfo?.authors || book.authors || ['Unknown Author'];
+      const authors = book.volumeInfo?.authors?.join(', ') || book.authors?.join(', ') || ['Unknown Author'];
       const description = book.volumeInfo?.description || book.description || 'No Description Available';
       const thumbnail = book.volumeInfo?.imageLinks?.thumbnail || book.thumbnail || 'https://via.placeholder.com/150';
+
+      const category =  book.volumeInfo?.categories?.join(', ') || book.categories?.join(', ') || "Unknown Category"
+      const publishDate = book.volumeInfo?.publishedDate || book.publishedDate || "No Published Date Available"
+      const pageCount = book.volumeInfo?.pageCount || book.pageCount || "No Page Count Available"
 
         return (
           <Modal
@@ -101,15 +109,18 @@ export default function BookCard({book}) {
               <h4 style={{ marginBottom: '20px' }}>{authors}</h4>
               <p><strong>Subtitle:</strong> {subtitle}</p>
               <p><strong>Publisher:</strong> {publisher}</p>
+              <p><strong>Category:</strong> {category}</p>
+              <p><strong>Publish Date:</strong> {publishDate}</p>
+              <p><strong>Page Count:</strong> {pageCount}</p>
               <p>{description}</p>
             </Modal.Body>
             <Modal.Footer>
                 {router.pathname !== '/favorites' && (
-                    <Button variant="primary" onClick={() => addBookToFavorites(book)}>
+                    <Button variant="secondary" onClick={() => addBookToFavorites(book)}>
                         Add To Favorites
                     </Button>
                 )}
-              <Button onClick={props.onHide}>Close</Button>
+              <Button variant="secondary" onClick={props.onHide}>Close</Button>
             </Modal.Footer>
           </Modal>
         );
@@ -117,7 +128,7 @@ export default function BookCard({book}) {
 
     const [modalShow, setModalShow] = useState(false);
     const title = book.volumeInfo?.title || book.title || 'No Title Available';
-    const authors = book.volumeInfo?.authors || book.authors || ['Unknown Author'];
+    const authors = book.volumeInfo?.authors?.join(', ') || book.authors?.join(', ') || ['Unknown Author'];
     const thumbnail = book.volumeInfo?.imageLinks?.thumbnail || book.thumbnail || 'https://via.placeholder.com/150';
 
     return (
@@ -132,17 +143,17 @@ export default function BookCard({book}) {
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>{authors}</Card.Text>
             </Card.Body>
-            <div className="d-flex flex-column p-2">
-                <Button variant="primary" className="mb-2" onClick={() => setModalShow(true)}>
+            <div className="d-flex flex-column align-items-center p-2">
+                <Button variant="secondary" className="mb-2 w-75" onClick={() => setModalShow(true)}>
                     Show more
                 </Button>
                 {router.pathname !== '/favorites' && (
-                    <Button variant="primary" className="mb-2" onClick={() => addBookToFavorites(book)}>
+                    <Button variant="secondary" className="mb-2 w-75" onClick={() => addBookToFavorites(book)}>
                         Add To Favorites
                     </Button>
                 )}
                 {router.pathname === '/favorites' && (
-                    <Button variant="danger" className="mb-2" onClick={() => removeBookFromFavorites(book)}>
+                    <Button variant="danger" className="mb-2 w-75" onClick={() => removeBookFromFavorites(book)}>
                         Remove From Favorites
                     </Button>
                 )}

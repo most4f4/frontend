@@ -83,7 +83,7 @@ export default function SearchForm() {
                 </Form.Group>
                 <br />
                 <div className="text-center">
-                    <Button variant="primary" type="submit">
+                    <Button variant="secondary" type="submit">
                         Search
                     </Button>
                 </div>
@@ -99,9 +99,11 @@ export default function SearchForm() {
                 ))}
             </Row>
         </div>
-        <div className="d-flex justify-content-center">
-            <CreatePagination />
-        </div>
+        {paginatedBooks.length > 0 && (
+            <div className="d-flex justify-content-center">
+                <CreatePagination />
+            </div>
+        )}
         </Container>
     );
 }

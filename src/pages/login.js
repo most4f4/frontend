@@ -64,7 +64,7 @@ export default function Login() {
                     </Alert>
                 }
                 <br/>
-                <Button variant="primary" className="pull-right" type="submit">Sign in</Button>
+                <Button variant="secondary" className="pull-right" type="submit">Sign in</Button>
             </Form>
         </div>
     );

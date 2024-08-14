@@ -105,3 +105,27 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Pagination class stylings */
+.custom-pagination .page-item .page-link {
+  color: white;
+  background-color: #6c757d;
+  /*border-color: #6c757d; */ /* This one is optional, it looks better without it */
+}
+
+.custom-pagination .page-item.active .page-link {
+  color: white;
+  background-color: #212529;
+  border-color: #212529;
+  pointer-events: none;
+}
+
+.custom-pagination .page-item:not(.active):hover .page-link {
+  background-color: #5a6268;
+  color: white;
+}
+
+.custom-pagination .page-item:not(.active):hover .page-link {
+  background-color: #5a6268;
+  border-color: #545b62;
+}

@@ -67,7 +67,7 @@ export default function Register() {
                     </Alert>
                 }
                 <br/>
-                <Button variant="primary" className="pull-right" type="submit">Sign up</Button>
+                <Button variant="secondary" className="pull-right" type="submit">Sign up</Button>
             </Form>
         </div>
     );

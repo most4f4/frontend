@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { Container, Row, Col, Alert, Button, Card } from 'react-bootstrap';
 
+
 export default function CustomErrorPage() {
   const router = useRouter();
 
@@ -14,7 +15,7 @@ export default function CustomErrorPage() {
                                 <Alert variant="warning">
                                     You need to log in.
                                 </Alert>
-                                <Button href="/login" variant="primary" className="me-2">
+                                <Button href="/login" variant="secondary" className="me-2">
                                     Log In
                                 </Button>
                                 <Button href="/register" variant="secondary">
